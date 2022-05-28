@@ -13,12 +13,9 @@
         <div class="schedule-event-box__abstract">
           <div>
             <div class="schedule-event-box__title-row">
-                <div class="schedule-event-box__title">
-                  {{ event.title }}
-                </div>
-                <!-- <a @click.stop href="#" rel="noopener noreferrer" class="schedule-event-box__calendar-icon">
-                  <img @click.stop width="25" src="../../assets/calendar.png" />
-                </a> -->
+              <div class="schedule-event-box__title">
+                {{ event.title }}
+              </div>
             </div>
             <span
               class="schedule-event-box__persons-name"

@@ -14,7 +14,24 @@
             {{ formatDate(modalContent.date) }} >
             {{ formatDuration(modalContent.start, modalContent.duration) }} >
             {{ modalContent.room }}
+              <a @click.stop :href="getLinkForAddToEvent()" target="_blank" rel="noopener noreferrer" class="modal__calendar-link">
+                <button class="modal__button-add-to-calendar">
+                  <!-- <img @click.stop width="25" class="modal__calendar-icon" src="../../assets/calendar.svg" /> -->
+                  add to Google calendar
+                </button>
+              </a>           
           </div>
+
+          <!-- <div @click.stop title="Add to Calendar" class="addeventatc">
+            Add to Calendar
+            <span class="start">{{ new Date(modalContent.date).toISOString() }}</span>
+            <span class="end">{{ addMinutes(new Date(modalContent.date), hoursToMinutes(modalContent.duration))}}</span>
+            <span class="timezone">Prague</span>
+            <span class="title">{{ modalContent.title }}</span>
+            <span class="description">{{ modalContent.abstract}}</span>
+            <span class="location">Prague {{ modalContent.room }}</span>
+          </div> -->
+
 
           <div class="modal__abstract">
             {{ modalContent.abstract }}
@@ -68,6 +85,22 @@ import Image from "@/components/Image.vue";
 const props = defineProps<{
   modelValue?: any;
 }>();
+
+const getLinkForAddToEvent = () => {
+  return `https://calendar.google.com/calendar/r/eventedit?text=${getPersonsNames()}+-+${props.modelValue.title}&dates=${formatDateForGoogle(new Date(props.modelValue.date))}/${formatDateForGoogle(addMinutes(new Date(props.modelValue.date), hoursToMinutes(props.modelValue.duration)))}&details=${props.modelValue.abstract}&location=Prague+${props.modelValue.room}`
+}
+
+function addMinutes(date: Date, minutes: number) {
+    return new Date(date.getTime() + minutes*60000);
+}
+
+const getPersonsNames = () => {
+  return props.modelValue.persons.map((person: any) => person.public_name).join(", ");
+}
+
+const formatDateForGoogle = (date: Date) => {
+  return date.toISOString().replace(/(-|:|\.)/g, "")
+}
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -202,6 +235,8 @@ const modalContent = computed({
   color: grey;
   text-transform: uppercase;
   margin-bottom: 2rem;
+      display: flex;
+    align-items: center;
 }
 
 @media (min-width: 970px) {
@@ -250,8 +285,12 @@ const modalContent = computed({
 .modal__person-bio-detail {
   font-size: 14px;
   color: black;
-  margin-bottom: 2rem;
 }
+
+.modal__calendar-icon {
+  margin: 0 0 -2px 1.5rem;
+}
+
 
 .modal__description, .modal__abstract, .modal__description-text, .modal__person-bio-detail, .modal__person-bio-name, .modal__date-duration-place,   {
     white-space: pre-line;
@@ -267,6 +306,32 @@ const modalContent = computed({
     font-size: 17px;
   }
 
+}
+
+.modal__button-add-to-calendar {
+  background-color: var(--col-primary-action);
+  color: white;
+  border-radius: 50px;
+  padding: 0px 12px;
+  margin: 0 0 0 1rem;
+
+  text-transform: uppercase;
+  font-family: "Archivo SemiExpanded", Verdana, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+@media (min-width: 1120px) {
+  .modal__button-add-to-calendar {
+    padding: 4px 12px;
+    font-size: 15px;
+    line-height: 22px;
+    margin: 0 0 0 2rem;
+  }
 }
 
 /* Animation */
