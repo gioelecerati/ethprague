@@ -20,9 +20,12 @@
         </div>
 
         <div class="faq__block-content-container" :style="getBlockContentStyle(block)">
-          <div v-if="block.html" v-html="block.html" class="faq__block-content-text">
+          <div  v-if="block.blockName === 'expectation'" v-html="block.html" class="faq__block-content-text">
           </div>
-          <SleepAndRest class="faq__block-content-text" v-else />
+          <div class="faq__block-content-text" v-if="block.blockName === 'location'">
+            <Location />
+          </div>
+          <SleepAndRest v-if="block.blockName === 'sleepAndRest'" class="faq__block-content-text"/>
         </div>
       </div>
     </div>
@@ -33,6 +36,7 @@
 import { ref } from 'vue';
 import SectionTitle from "@/components/SectionTitle.vue";
 import SleepAndRest from "@/components/faq/SleepAndRest.vue";
+import Location from './faq/Location.vue';
 
 type Block = {
   title: string;
@@ -60,6 +64,7 @@ const blocks = [
     title: 'what to expect on-site',
     toggleBgColor: '#01ffe5',
     contentBgColor: '#9efff5',
+    blockName: 'expectation',
     html:
         '<p> The event is primarily a hackathon BUT since the venue enables us to also host talks, we would be crazy not to have those! </p> ' +
         '<p> Not only there are going to be various types of workspaces available, but also there is going to be:  </p> ' +
@@ -75,15 +80,18 @@ const blocks = [
     title: 'location',
     toggleBgColor: '#81ff70',
     contentBgColor: '#c1feb8',
-    html:
-        '<div style="text-align: center"> ' +
-        '<h3> Paralelni Polis & LaFabrika</h3>' +
-        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.088196893983!2d14.448352415899075!3d50.10335612019434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94b187dd27cd%3A0x87ff46ed44b1086f!2sD%C4%9Blnick%C3%A1%2043%2C%20170%2000%20Praha%207-Hole%C5%A1ovice!5e0!3m2!1sen!2scz!4v1649344922786!5m2!1sen!2scz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' +
-        '</div>',
+    blockName: 'location',
+    // html: 'location',
+    //     '<div style="text-align: center"> ' +
+    //     '<h3> Paralelni Polis & LaFabrika</h3>' +
+    //     '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.088196893983!2d14.448352415899075!3d50.10335612019434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94b187dd27cd%3A0x87ff46ed44b1086f!2sD%C4%9Blnick%C3%A1%2043%2C%20170%2000%20Praha%207-Hole%C5%A1ovice!5e0!3m2!1sen!2scz!4v1649344922786!5m2!1sen!2scz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' +
+    //     '</div>',
     blockHeight: '450px'
   },
   {
     title: 'sleep & rest',
+    blockName: 'sleepAndRest',
+
     toggleBgColor: '#ffff01',
     contentBgColor: '#ffffb2',
     // html: SleepAndRest,

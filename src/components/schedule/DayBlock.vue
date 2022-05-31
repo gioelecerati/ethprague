@@ -57,7 +57,7 @@
 import { Venues } from "@/components/schedule/useSchedule";
 import ScheduleEventBox from "./ScheduleEventBox.vue";
 const props = defineProps<{
-  dayName: string;
+  dayName?: string;
   title: string;
   dayData: any;
 }>();

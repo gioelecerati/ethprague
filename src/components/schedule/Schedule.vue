@@ -1,23 +1,8 @@
 <template>
   <div id="Schedule" class="schedule">
-    <div class="schedule__venues-opening">
-    <div class="schedule__venue-opening">
-      <strong>La Fabrika</strong><br/>
-      (entrance for registered)<br/>
-      address: Komunardu 1001, Prague<br/>
-      Fri 10am – 10pm<br/>
-      Sat 9am – 10pm<br/>
-      Sun 9am – 7pm<br/>
-    </div>
 
-    <div class="schedule__venue-opening" >
-      <strong>Paralelni Polis</strong><br/>
-      (registration desk + entrance)<br/>
-      address: Delnicka 475/43, Prague<br/>
-      from Friday 10th (10am)<br/>
-      till Sunday 12th (7pm)<br/>
-    </div>
-    </div>
+    <span id="Friday-desktop"/>
+    <span id="Friday-mobile" />
 
     <div
       :class="[
@@ -39,6 +24,8 @@
           speakers
         </button>
       </div>
+
+      
 
       <div v-if="showSection === Sections.SCHEDULE">
         <div class="schedule__dates-buttons">
@@ -85,8 +72,28 @@
       class="schedule__content"
       v-if="scheduleJsonData && showSection === Sections.SCHEDULE"
     >
+      <div class="schedule__venues-opening">
+        
+        <div class="schedule__venue-opening">
+          <span class="schedule__venue-opening-title"><strong>La Fabrika</strong><br/></span>
+          (entrance for registered)<br/>
+          address: Komunardu 1001, Prague<br/>
+          Fri 10am – 10pm<br/>
+          Sat 9am – 10pm<br/>
+          Sun 9am – 7pm<br/>
+        </div>
+
+        <div class="schedule__venue-opening" >
+          <span  class="schedule__venue-opening-title"><strong>Paralelni Polis</strong><br/></span>
+          (registration desk + entrance)<br/>
+          address: Delnicka 475/43, Prague<br/>
+          from Friday 10th (10am)<br/>
+          till Sunday 12th (7pm)<br/>
+        </div>
+      </div>
+
       <div class="schedule__content--mobile">
-        <div id="Friday-mobile" class="schedule__day-title">
+        <div class="schedule__day-title">
           Friday 10. June
         </div>
         <ScheduleEventBox
@@ -116,7 +123,7 @@
         />
       </div>
       <div class="schedule__content--desktop">
-        <DayBlock :dayData="friday" @set-modal-content="setModalContent" title="Friday 10. June" dayName="Friday"/>
+        <DayBlock :dayData="friday" @set-modal-content="setModalContent" title="Friday 10. June" dayName="Friday-disabled-local-link"/>
         
         <DayBlock :dayData="saturday" @set-modal-content="setModalContent" title="Saturday 11. June" dayName="Saturday"/>
 
@@ -471,7 +478,7 @@ onUnmounted(() => {
 .schedule__venues-opening {
   font-size: 15px;
   display: flex;
-  margin: 3rem 0 0;
+  margin: 16rem 0 -15rem;
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
@@ -480,12 +487,23 @@ onUnmounted(() => {
 @media (min-width: 1120px) {
   .schedule__venues-opening{
     font-size: 17px;
+    margin: 16rem 0 -17.5rem;
   }
 }
 .schedule__venue-opening {
   margin: 0 auto;
   width: 34rem;
   padding: var(--app-padding)
+}
+
+.schedule__venue-opening-title {
+  display: block;
+}
+
+@media (min-width: 1120px) { 
+  .schedule__venue-opening-title {
+    display: none;
+  }
 }
 
 </style>
