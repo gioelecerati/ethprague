@@ -2,6 +2,7 @@
   <div :id="`${dayName}-desktop`" class="schedule__day-title">
     {{ title }}
   </div>
+  <slot />
   <div class="schedule__content-desktop-columns">
     <table class="schedule__table">
       <tbody>
@@ -73,16 +74,14 @@ const hoursToMinutes = (time: string) => {
 };
 
 const getCellStyle = (rowData: any, venue: any) => {
-  const changedPadding = rowData.isInTimeRange ? {padding: '50px 0'} : {padding: '0'}
+  const isDisplayContent = rowData.paralelniPolis && !rowData.laFabrika && rowData.paralelniPolis.laFabrikaEventRowspanNum > 0;
+
+  const changedPadding = rowData.isInTimeRange ? {padding: '30px 0', display: isDisplayContent ? 'contents' : 'table-cell'} : {padding: '0'}
 
   return venue ? {} : changedPadding
 }
 
-const minutesToHours = (minutes: number) => {
-  const hours = Math.floor(minutes / 60);
-  const minutesLeft = minutes % 60;
-  return `${hours}:${minutesLeft < 10 ? "0" + minutesLeft : minutesLeft}`;
-};
+const TIME_BLOCK = 10
 
 const prepareDataForTable = (dayObjectWithEvents?: any) => {
   let startTimeInMinutes = 0;
@@ -92,6 +91,7 @@ const prepareDataForTable = (dayObjectWithEvents?: any) => {
 
   const latestEventTime = dayObjectWithEvents.reduce((max: any, p: any) => (hoursToMinutes(p.start) + hoursToMinutes(p.duration)) > max ? (hoursToMinutes(p.start) + hoursToMinutes(p.duration)) : max, 0);
 
+  let laFabrikaEventRowspanNum = 0
 
   do {
     const isInTimeRange = startTimeInMinutes > earliestEventTime && startTimeInMinutes < latestEventTime
@@ -99,16 +99,16 @@ const prepareDataForTable = (dayObjectWithEvents?: any) => {
     let laFabrikaEvent = dayObjectWithEvents.find((event: any) => {
       return (
         event.room === Venues.LA_FABRIKA &&
-        hoursToMinutes(event.start) < startTimeInMinutes + 29 &&
-        hoursToMinutes(event.start) + 29 > startTimeInMinutes
+        hoursToMinutes(event.start) < startTimeInMinutes + (TIME_BLOCK - 1) &&
+        hoursToMinutes(event.start) + (TIME_BLOCK - 1) > startTimeInMinutes
       );
     });
 
     let polisEvent = dayObjectWithEvents.find((event: any) => {
       return (
         event.room === Venues.PARALELNI_POLIS &&
-        hoursToMinutes(event.start) < startTimeInMinutes + 29 &&
-        hoursToMinutes(event.start) + 29 > startTimeInMinutes
+        hoursToMinutes(event.start) < startTimeInMinutes + (TIME_BLOCK - 1) &&
+        hoursToMinutes(event.start) + (TIME_BLOCK - 1) > startTimeInMinutes
       );
     });
 
@@ -124,6 +124,8 @@ const prepareDataForTable = (dayObjectWithEvents?: any) => {
       if (event.laFabrika && event.laFabrika.event && laFabrikaEvent)
         return event.laFabrika.event.id === laFabrikaEvent.id;
     });
+
+    laFabrikaEventRowspanNum = laFabrikaEvent ? Math.floor(hoursToMinutes(laFabrikaEvent.duration) / TIME_BLOCK) : laFabrikaEventRowspanNum - 1
     if (isLaFabrikaAlreadyInArray) {
       laFabrikaEvent = undefined;
     }
@@ -132,9 +134,10 @@ const prepareDataForTable = (dayObjectWithEvents?: any) => {
         paralelniPolis:
           polisEvent && !isPolisEventAlreadyInArray
             ? {
+                laFabrikaEventRowspanNum,
                 event: polisEvent,
                 duration: hoursToMinutes(polisEvent.duration),
-                rowSpan: Math.floor(hoursToMinutes(polisEvent.duration) / 30),
+                rowSpan: Math.floor(hoursToMinutes(polisEvent.duration) / TIME_BLOCK),
               }
             : undefined,
         laFabrika:
@@ -143,7 +146,7 @@ const prepareDataForTable = (dayObjectWithEvents?: any) => {
                 event: laFabrikaEvent,
                 duration: hoursToMinutes(laFabrikaEvent.duration),
                 rowSpan: Math.floor(
-                  hoursToMinutes(laFabrikaEvent.duration) / 30
+                  hoursToMinutes(laFabrikaEvent.duration) / TIME_BLOCK
                 ),
               }
             : undefined,
@@ -151,7 +154,7 @@ const prepareDataForTable = (dayObjectWithEvents?: any) => {
         isInTimeRange
       });
 
-    startTimeInMinutes += 30;
+    startTimeInMinutes += TIME_BLOCK;
   } while (startTimeInMinutes < hoursToMinutes("23:59"));
 
   

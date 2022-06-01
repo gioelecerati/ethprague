@@ -1,7 +1,6 @@
 <template>
   <div id="Schedule" class="schedule">
-
-    <span id="Friday-desktop"/>
+    <span id="Friday-desktop" />
     <span id="Friday-mobile" />
 
     <div
@@ -24,8 +23,6 @@
           speakers
         </button>
       </div>
-
-      
 
       <div v-if="showSection === Sections.SCHEDULE">
         <div class="schedule__dates-buttons">
@@ -72,7 +69,7 @@
       class="schedule__content"
       v-if="scheduleJsonData && showSection === Sections.SCHEDULE"
     >
-      <div class="schedule__venues-opening">
+      <!-- <div class="schedule__venues-opening">
         
         <div class="schedule__venue-opening">
           <span class="schedule__venue-opening-title"><strong>La Fabrika</strong><br/></span>
@@ -90,12 +87,29 @@
           from Friday 10th (10am)<br/>
           till Sunday 12th (7pm)<br/>
         </div>
-      </div>
+      </div> -->
 
       <div class="schedule__content--mobile">
-        <div class="schedule__day-title">
-          Friday 10. June
+        <div class="schedule__day-title">Friday 10. June</div>
+
+        <div class="schedule__venues-opening">
+          <div class="schedule__venue-opening">
+            <div class="schedule__venue-opening-text">
+              <strong>La Fabrika</strong><br />
+              open – 10am<br />
+              close – 10pm<br />
+            </div>
+          </div>
+
+          <div class="schedule__venue-opening">
+            <div class="schedule__venue-opening-text">
+              <strong>Paralelni Polis</strong><br />
+              open – 10am<br />
+              close on Sunday<br />
+            </div>
+          </div>
         </div>
+
         <ScheduleEventBox
           v-for="event in friday"
           :key="event.id"
@@ -106,6 +120,23 @@
         <div id="Saturday-mobile" class="schedule__day-title">
           Saturday 11. June
         </div>
+
+        <div class="schedule__venues-opening">
+          <div class="schedule__venue-opening">
+            <div class="schedule__venue-opening-text">
+              <strong>La Fabrika</strong><br />
+              open – 9am<br />
+              close – 10pm<br />
+            </div>
+          </div>
+
+          <div class="schedule__venue-opening">
+            <div class="schedule__venue-opening-text">
+              <strong>Paralelni Polis</strong><br />
+              nonstop
+            </div>
+          </div>
+        </div>
         <ScheduleEventBox
           v-for="event in saturday"
           :key="event.id"
@@ -115,6 +146,23 @@
         <div id="Sunday-mobile" class="schedule__day-title">
           Sunday 12. June
         </div>
+
+        <div class="schedule__venues-opening">
+          <div class="schedule__venue-opening">
+            <div class="schedule__venue-opening-text">
+              <strong>La Fabrika</strong><br />
+              open – 9am<br />
+              close – 7pm<br />
+            </div>
+          </div>
+
+          <div class="schedule__venue-opening">
+            <div class="schedule__venue-opening-text">
+              <strong>Paralelni Polis</strong><br />
+              close – 7pm
+            </div>
+          </div>
+        </div>
         <ScheduleEventBox
           v-for="event in sunday"
           :key="event.id"
@@ -123,12 +171,62 @@
         />
       </div>
       <div class="schedule__content--desktop">
-        <DayBlock :dayData="friday" @set-modal-content="setModalContent" title="Friday 10. June" dayName="Friday-disabled-local-link"/>
-        
-        <DayBlock :dayData="saturday" @set-modal-content="setModalContent" title="Saturday 11. June" dayName="Saturday"/>
+        <DayBlock
+          :dayData="friday"
+          @set-modal-content="setModalContent"
+          title="Friday 10. June"
+          dayName="Friday-disabled-local-link"
+        >
+          <div class="schedule__venues-opening">
+            <div class="schedule__venue-opening">
+              <strong>La Fabrika</strong><br/>
+              <div class="schedule__venue-opening-text">
+                open – 10am<br />
+                close – 10pm<br />
+              </div>
+            </div>
 
-        <DayBlock :dayData="sunday" @set-modal-content="setModalContent" title="Sunday 12. June" dayName="Sunday"/>
+            <div class="schedule__venue-opening">
+              <strong>Paralelni Polis</strong><br/>
+              <div class="schedule__venue-opening-text">
+                open – 10am<br />
+                close on Sunday<br />
+              </div>
+            </div>
+          </div>
+        </DayBlock>
 
+        <DayBlock
+          :dayData="saturday"
+          @set-modal-content="setModalContent"
+          title="Saturday 11. June"
+          dayName="Saturday"
+        >
+          <div class="schedule__venues-opening">
+            <div class="schedule__venue-opening">
+              open – 9am<br />
+              close – 10pm<br />
+            </div>
+
+            <div class="schedule__venue-opening">nonstop<br /></div>
+          </div>
+        </DayBlock>
+
+        <DayBlock
+          :dayData="sunday"
+          @set-modal-content="setModalContent"
+          title="Sunday 12. June"
+          dayName="Sunday"
+        >
+          <div class="schedule__venues-opening">
+            <div class="schedule__venue-opening">
+              open – 9am<br />
+              close – 7pm<br />
+            </div>
+
+            <div class="schedule__venue-opening">close – 7pm<br /></div>
+          </div>
+        </DayBlock>
       </div>
     </div>
   </div>
@@ -141,7 +239,7 @@ import ModalSchedule from "./ModalSchedule.vue";
 import ScheduleEventBox from "./ScheduleEventBox.vue";
 import Speakers from "./Speakers.vue";
 import { peopleData, fetchPeopleData } from "@/components/usePeople";
-import {Venues} from "@/components/schedule/useSchedule";
+import { Venues } from "@/components/schedule/useSchedule";
 import DayBlock from "./DayBlock.vue";
 const axios = require("axios").default;
 
@@ -334,9 +432,10 @@ onUnmounted(() => {
 }
 
 .schedule__venue {
-  margin: auto;
   color: var(--col-primary-action);
   font-size: 25px;
+  width: 100%;
+  text-align: center;
 }
 
 .schedule__loading {
@@ -369,6 +468,7 @@ onUnmounted(() => {
 
   .schedule__content--desktop {
     display: flex;
+    width: 100%;
     flex-direction: column;
   }
 }
@@ -478,32 +578,40 @@ onUnmounted(() => {
 .schedule__venues-opening {
   font-size: 15px;
   display: flex;
-  margin: 16rem 0 -15rem;
+  margin: 3rem 0 3rem;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
+}
+
+.schedule__venue-opening {
+  display: flex;
+  width: 100%;
+  padding: var(--app-padding);
+}
+
+@media (min-width: 500px) {
+  .schedule__venues-opening {
+    flex-wrap: nowrap;
+  }
+  .schedule__venue-opening {
+    justify-content: center;
+  }
 }
 
 @media (min-width: 1120px) {
-  .schedule__venues-opening{
+  .schedule__venues-opening {
     font-size: 17px;
-    margin: 16rem 0 -17.5rem;
+    /* margin: 16rem 0 -17.5rem; */
   }
-}
-.schedule__venue-opening {
-  margin: 0 auto;
-  width: 34rem;
-  padding: var(--app-padding)
 }
 
 .schedule__venue-opening-title {
   display: block;
 }
 
-@media (min-width: 1120px) { 
+@media (min-width: 1120px) {
   .schedule__venue-opening-title {
     display: none;
   }
 }
-
 </style>
