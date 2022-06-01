@@ -179,7 +179,7 @@
         >
           <div class="schedule__venues-opening">
             <div class="schedule__venue-opening">
-              <strong>La Fabrika</strong><br/>
+              <!-- <strong>La Fabrika</strong><br/> -->
               <div class="schedule__venue-opening-text">
                 open – 10am<br />
                 close – 10pm<br />
@@ -187,7 +187,7 @@
             </div>
 
             <div class="schedule__venue-opening">
-              <strong>Paralelni Polis</strong><br/>
+              <!-- <strong>Paralelni Polis</strong><br/> -->
               <div class="schedule__venue-opening-text">
                 open – 10am<br />
                 close on Sunday<br />
