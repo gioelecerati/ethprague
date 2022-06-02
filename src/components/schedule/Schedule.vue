@@ -52,8 +52,15 @@
           </a>
         </div>
         <div class="schedule__venues">
-          <div class="schedule__venue">La Fabrika</div>
-          <div class="schedule__venue">Paralelni Polis</div>
+          <div class="schedule__venue">
+            <div>La Fabrika</div>
+            <div class="schedule__venue-additional-info">Entrance #2</div>
+          </div>
+          <div class="schedule__venue">
+            <div>Paralelni Polis</div>
+            <div class="schedule__venue-additional-info">Registrations + Entrance #1</div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -179,7 +186,6 @@
         >
           <div class="schedule__venues-opening">
             <div class="schedule__venue-opening">
-              <!-- <strong>La Fabrika</strong><br/> -->
               <div class="schedule__venue-opening-text">
                 open door – 10am<br />
                 close door – 10pm<br />
@@ -187,7 +193,6 @@
             </div>
 
             <div class="schedule__venue-opening">
-              <!-- <strong>Paralelni Polis</strong><br/> -->
               <div class="schedule__venue-opening-text">
                 open door – 10am<br />
                 close door on Sunday<br />
@@ -434,6 +439,7 @@ onUnmounted(() => {
 .schedule__venue {
   color: var(--col-primary-action);
   font-size: 25px;
+  line-height: 28px;
   width: 100%;
   text-align: center;
 }
@@ -613,5 +619,9 @@ onUnmounted(() => {
   .schedule__venue-opening-title {
     display: none;
   }
+}
+
+.schedule__venue-additional-info {
+  font-size: 15px;
 }
 </style>
