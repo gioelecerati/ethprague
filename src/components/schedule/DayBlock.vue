@@ -26,6 +26,7 @@
                 )
               "
               :event="rowData.laFabrika.event"
+              :rowspan="rowData.laFabrika.rowSpan"
             />
           </td>
           <td
@@ -46,6 +47,7 @@
                 )
               "
               :event="rowData.paralelniPolis.event"
+              :rowspan="rowData.paralelniPolis.rowSpan"
             />
           </td>
         </tr>

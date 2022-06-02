@@ -96,16 +96,16 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>La Fabrika</strong><br />
-              open – 10am<br />
-              close – 10pm<br />
+              open door – 10am<br />
+              close door – 10pm<br />
             </div>
           </div>
 
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>Paralelni Polis</strong><br />
-              open – 10am<br />
-              close on Sunday<br />
+              open door – 10am<br />
+              close door on Sunday<br />
             </div>
           </div>
         </div>
@@ -125,8 +125,8 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>La Fabrika</strong><br />
-              open – 9am<br />
-              close – 10pm<br />
+              open door – 9am<br />
+              close door – 10pm<br />
             </div>
           </div>
 
@@ -151,15 +151,15 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>La Fabrika</strong><br />
-              open – 9am<br />
-              close – 7pm<br />
+              open door – 9am<br />
+              close door – 7pm<br />
             </div>
           </div>
 
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>Paralelni Polis</strong><br />
-              close – 7pm
+              close door – 7pm
             </div>
           </div>
         </div>
@@ -181,16 +181,16 @@
             <div class="schedule__venue-opening">
               <!-- <strong>La Fabrika</strong><br/> -->
               <div class="schedule__venue-opening-text">
-                open – 10am<br />
-                close – 10pm<br />
+                open door – 10am<br />
+                close door – 10pm<br />
               </div>
             </div>
 
             <div class="schedule__venue-opening">
               <!-- <strong>Paralelni Polis</strong><br/> -->
               <div class="schedule__venue-opening-text">
-                open – 10am<br />
-                close on Sunday<br />
+                open door – 10am<br />
+                close door on Sunday<br />
               </div>
             </div>
           </div>
@@ -204,8 +204,8 @@
         >
           <div class="schedule__venues-opening">
             <div class="schedule__venue-opening">
-              open – 9am<br />
-              close – 10pm<br />
+              open door – 9am<br />
+              close door – 10pm<br />
             </div>
 
             <div class="schedule__venue-opening">nonstop<br /></div>
@@ -220,11 +220,11 @@
         >
           <div class="schedule__venues-opening">
             <div class="schedule__venue-opening">
-              open – 9am<br />
-              close – 7pm<br />
+              open door – 9am<br />
+              close door – 7pm<br />
             </div>
 
-            <div class="schedule__venue-opening">close – 7pm<br /></div>
+            <div class="schedule__venue-opening">close door – 7pm<br /></div>
           </div>
         </DayBlock>
       </div>
@@ -600,7 +600,7 @@ onUnmounted(() => {
 
 @media (min-width: 1120px) {
   .schedule__venues-opening {
-    font-size: 17px;
+    font-size: 20px;
     /* margin: 16rem 0 -17.5rem; */
   }
 }
