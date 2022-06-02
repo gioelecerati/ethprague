@@ -103,6 +103,7 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>La Fabrika</strong><br />
+              Entrance #2<br />
               open door – 10am<br />
               close door – 10pm<br />
             </div>
@@ -111,6 +112,7 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>Paralelni Polis</strong><br />
+              Registrations + Entrance #1<br />
               open door – 10am<br />
               close door on Sunday<br />
             </div>
@@ -132,6 +134,7 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>La Fabrika</strong><br />
+              Entrance #2<br />
               open door – 9am<br />
               close door – 10pm<br />
             </div>
@@ -140,6 +143,7 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>Paralelni Polis</strong><br />
+              Registrations + Entrance #1<br />
               nonstop
             </div>
           </div>
@@ -158,6 +162,7 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>La Fabrika</strong><br />
+              Entrance #2<br />
               open door – 9am<br />
               close door – 7pm<br />
             </div>
@@ -166,6 +171,7 @@
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
               <strong>Paralelni Polis</strong><br />
+              Registrations + Entrance #1<br />
               close door – 7pm
             </div>
           </div>
