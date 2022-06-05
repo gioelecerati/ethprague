@@ -49,13 +49,14 @@
 
     <div class="sponsors-and-partners__separation-line" />
 
-    <div class="sponsors-and-partners__block">
+    <div class="sponsors-and-partners__block
+">
       <div
-        class="sponsors-and-partners__small-title sponsors-and-partners__title-few"
+        class="sponsors-and-partners__small-title  sponsors-and-partners__title-few sponsors-and-partners__black-white-filter"
       >
         Frens
       </div>
-      <div class="sponsors-and-partners__friends-icons">
+      <div class="sponsors-and-partners__friends-icons sponsors-and-partners__frens">
         <a
           v-for="company in friends"
           :key="company.name"
@@ -71,29 +72,18 @@
       </div>
     </div>
 
-<!--    <div class="sponsors-and-partners__separation-line" />-->
+   <div class="sponsors-and-partners__separation-line" />
 
-<!--    <div class="sponsors-and-partners__block">-->
-<!--      <div-->
-<!--          class="sponsors-and-partners__small-title sponsors-and-partners__title-few"-->
-<!--      >-->
-<!--        Media & Partners-->
-<!--      </div>-->
-<!--      <div class="sponsors-and-partners__others-icons">-->
-<!--        <a-->
-<!--            v-for="company in partners"-->
-<!--            :key="company.name"-->
-<!--            :href="company.link"-->
-<!--            target="_blank"-->
-<!--        >-->
-<!--          <img-->
-<!--              :src="getSponsorsOrPartnersImage(company.image)"-->
-<!--              :alt="company.name"-->
-<!--              class="sponsors-and-partners__friends-icon"-->
-<!--          />-->
-<!--        </a>-->
-<!--      </div>-->
-<!--    </div>-->
+   <div class="sponsors-and-partners__block">
+    <div class="sponsors-and-partners__small-title sponsors-and-partners__title-few">
+      Media
+    </div>
+    <div class="sponsors-and-partners__others-icons sponsors-and-partners__media">
+    <a v-for="company in partners" :key="company.name" :href="company.link" target="_blank">
+      <img :src="getSponsorsOrPartnersImage(company.image)" :alt="company.name" class="sponsors-and-partners__friends-icon"/>
+    </a>
+     </div>
+   </div>
   </div>
 </template>
 
@@ -127,9 +117,10 @@ const friends = [
 ];
 
 const partners = [
-  { name: "rekt", link: "https://simon@boba.network/", image: "boba-network.png" },
-  { name: "banklessdao", link: "https://simon@boba.network/", image: "boba-network.png" },
-  { name: "serotonin", link: "https://simon@boba.network/", image: "boba-network.png" }
+  { name: "rekt", link: "https://rekt.news/", image: "rekt.png" },
+  { name: "BanklessDAO", link: "https://www.bankless.community/", image: "bankless.png" },
+  { name: "WindingTree", link: "https://windingtree.com/", image: "windingtree.png" },
+  { name: "Serotonin", link: "https://serotonin.co/", image: "serotonin.png" }
 ]
 
 const getSponsorsOrPartnersImage = (imageName: string) => {
@@ -205,7 +196,18 @@ const getSponsorsOrPartnersImage = (imageName: string) => {
 .sponsors-and-partners__others-icons {
   column-gap: 115px;
   row-gap: 90px;
-  filter: sepia(100%) grayscale(1) brightness(40%) contrast(338%)
+  display: flex;
+  /* filter: sepia(100%) grayscale(1) brightness(40%) contrast(338%) */
+}
+
+.sponsors-and-partners__frens  {
+  margin-bottom: 90px;
+}
+
+.sponsors-and-partners__media {
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .sponsors-and-partners__black-white-filter {
