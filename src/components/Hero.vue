@@ -1,5 +1,5 @@
 <template>
-  <div class="hero">
+  <!-- <div class="hero">
     <div class="hero__image-desktop">
       <img class="hero__image-eth" src="../assets/hero/hero_eth.svg" />
       <img class="hero__image-polis" src="../assets/hero/hero_polis.svg" />
@@ -8,9 +8,33 @@
       <img class="hero__image-main-image" :src="getHeroImage(DeviceType.DESKTOP)" />
     </div>
     <img class="hero__image-mobile" :src="getHeroImage(DeviceType.MOBIL)" alt="hero" />
+  </div> -->
+
+    
+  <div class="hero__stream-buttons" v-if="!selectedLiveStream">
+    <h1 class="hero__stream-title">
+      Live stream
+    </h1>
+    <div class="manifesto__buttons-row">
+      <button class="manifesto__button" @click="selectStreamProvider(LiveStreamProvider.LP)">
+        Livepeer <span class="manifesto__headless-arrow" />
+      </button>
+
+      <button class="manifesto__button" @click="selectStreamProvider(LiveStreamProvider.YT)">
+        YouTube <span class="manifesto__headless-arrow" />
+      </button>
+    </div>
   </div>
 
-    <div class="hero__event-date">
+  <div v-else>
+    <iframe v-if="selectedLiveStream === LiveStreamProvider.LP" width="560" height="315" src="" title="Livepeer video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+
+    <iframe v-if="selectedLiveStream === LiveStreamProvider.YT" width="560" height="315" src="https://www.youtube.com/embed/31SV969GXaA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+
+  </div>
+  
+  
+  <div class="hero__event-date">
 		<div class="hero__event-date-marquee-block">
 			<div class="hero__event-date-marquee-inner to-right">
 				<span>
@@ -54,13 +78,25 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+
 
 enum DeviceType {
   MOBIL = 'mobile',
   DESKTOP = 'desktop',
 }
 
+enum LiveStreamProvider {
+  YT = 'Youtube',
+  LP = 'Livepeer',
+}
+const selectedLiveStream = ref()
+
 const stripe = 'ETH Prague \u00A0  June 10th — 12th \u00A0'.repeat(3)
+
+const selectStreamProvider = (provider: LiveStreamProvider) => {
+  selectedLiveStream.value = provider
+}
 
 const getHeroImage = (forDevice: string) => {
   const randomHeroNum = Math.floor(Math.random() * 4) + 1;
@@ -213,4 +249,94 @@ const getHeroImage = (forDevice: string) => {
     display: block;
   }
 }
+
+
+iframe {
+  display: block;       /* iframes are inline by default */
+  background: #000;
+  border: none;         /* Reset default border */
+  height: 90vh;        /* Viewport-relative units */
+  width: calc(100vw - var(--app-padding));
+}
+
+
+.manifesto__buttons-row {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  max-width: 1600px;
+  width: 100%;
+}
+
+@media (max-width: 1120px) {
+  .manifesto__buttons-row {
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .manifesto__button-one-button {
+    max-width: 90%;
+  }
+}
+
+.manifesto__button:hover,
+.manifesto__button:focus {
+  border: solid 2px var(--col-primary-action);
+  color: white;
+  box-shadow: inset 30px -8em 0 0 var(--col-primary-action);
+}
+
+.manifesto__button:hover .manifesto__headless-arrow {
+  border-left: solid 2px white;
+  border-bottom: solid 2px white;
+}
+
+.manifesto__headless-arrow {
+  border-left: solid 2px var(--col-primary-action);
+  border-bottom: solid 2px var(--col-primary-action);
+  transform: rotate(-135deg) skew(5deg, 5deg) translate(1px, -1px);
+  width: 12px;
+  height: 12px;
+  margin: 0 12px 2px;
+}
+
+
+.manifesto__button {
+  transition: all 0.3s;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-family: "Archivo SemiExpanded", Verdana, sans-serif;
+  font-size: 25px;
+  line-height: 29px;
+  color: var(--col-primary-action);
+  text-align: center;
+
+  border-radius: 300px;
+  width: 100%;
+  height: 170px;
+  border: solid 2px var(--col-primary-action);
+  background-color: white;
+
+  position: relative;
+}
+
+.hero__stream-buttons {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
+  padding: 0 var(--app-padding);
+}
+.hero__stream-title {
+  margin-bottom: 5rem;
+}
+
 </style>
