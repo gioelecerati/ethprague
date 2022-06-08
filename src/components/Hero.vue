@@ -15,13 +15,13 @@
     <h1 class="hero__stream-title">
       Live stream
     </h1>
-    <div class="manifesto__buttons-row">
-      <button class="manifesto__button" @click="selectStreamProvider(LiveStreamProvider.LP)">
-        Livepeer <span class="manifesto__headless-arrow" />
+    <div class="hero__buttons-row">
+      <button class="hero__button" @click="selectStreamProvider(LiveStreamProvider.LP)">
+        Livepeer <span class="hero__headless-arrow" />
       </button>
 
-      <button class="manifesto__button" @click="selectStreamProvider(LiveStreamProvider.YT)">
-        YouTube <span class="manifesto__headless-arrow" />
+      <button class="hero__button" @click="selectStreamProvider(LiveStreamProvider.YT)">
+        YouTube <span class="hero__headless-arrow" />
       </button>
     </div>
   </div>
@@ -256,11 +256,11 @@ iframe {
   background: #000;
   border: none;         /* Reset default border */
   height: 90vh;        /* Viewport-relative units */
-  width: calc(100vw - var(--app-padding));
+  width: 100%;
 }
 
 
-.manifesto__buttons-row {
+.hero__buttons-row {
   display: flex;
   gap: 30px;
   flex-direction: column;
@@ -269,28 +269,29 @@ iframe {
 }
 
 @media (max-width: 1120px) {
-  .manifesto__buttons-row {
+  .hero__buttons-row {
     flex-wrap: wrap;
     gap: 30px;
   }
-  .manifesto__button-one-button {
+  .hero__button-one-button {
     max-width: 90%;
   }
 }
 
-.manifesto__button:hover,
-.manifesto__button:focus {
+
+.hero__button:hover,
+.hero__button:focus {
   border: solid 2px var(--col-primary-action);
   color: white;
   box-shadow: inset 30px -8em 0 0 var(--col-primary-action);
 }
 
-.manifesto__button:hover .manifesto__headless-arrow {
+.hero__button:hover .hero__headless-arrow {
   border-left: solid 2px white;
   border-bottom: solid 2px white;
 }
 
-.manifesto__headless-arrow {
+.hero__headless-arrow {
   border-left: solid 2px var(--col-primary-action);
   border-bottom: solid 2px var(--col-primary-action);
   transform: rotate(-135deg) skew(5deg, 5deg) translate(1px, -1px);
@@ -300,7 +301,7 @@ iframe {
 }
 
 
-.manifesto__button {
+.hero__button {
   transition: all 0.3s;
   margin: 0;
   cursor: pointer;
@@ -338,5 +339,21 @@ iframe {
 .hero__stream-title {
   margin-bottom: 5rem;
 }
+
+@media (max-width: 1120px) {
+  .hero__button {
+    font-size: 20px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__button {
+    font-size: 15px;
+    height: 120px;
+    white-space: break-spaces;
+  }
+}
+
 
 </style>
