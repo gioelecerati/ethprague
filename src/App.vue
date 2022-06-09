@@ -27,6 +27,8 @@ import Footer from '@/components/Footer.vue';
 
     --mobile-breakpoint: 1120px;
     --app-padding: 15px;
+
+    --header-height: 80px;
   }
 
   html, body {

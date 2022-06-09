@@ -8,12 +8,16 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@types/video.js": "^7.3.40",
     "axios": "^0.26.1",
     "caniuse-lite": "^1.0.30001031",
     "core-js": "^2.6.11",
     "csvtojson": "^2.0.10",
     "paper": "^0.12.4",
+    "quasar": "^2.7.1",
     "require-context": "^1.1.0",
+    "video.js": "^7.0.3",
+    "videojs-youtube": "^2.6.1",
     "vue": "^3.2.29",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.14"

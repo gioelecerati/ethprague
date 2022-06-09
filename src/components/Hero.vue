@@ -9,104 +9,148 @@
     </div>
     <img class="hero__image-mobile" :src="getHeroImage(DeviceType.MOBIL)" alt="hero" />
   </div> -->
-
-    
+  <span id="liveStream" />
   <div class="hero__stream-buttons" v-if="!selectedLiveStream">
-    <h1 class="hero__stream-title">
-      Live stream
-    </h1>
+    <h1 class="hero__stream-title">Live stream</h1>
     <div class="hero__buttons-row">
-      <button class="hero__button" @click="selectStreamProvider(LiveStreamProvider.LP)">
+      <button
+        class="hero__button"
+        @click="selectStreamProvider(LiveStreamProvider.LP)"
+      >
         Livepeer <span class="hero__headless-arrow" />
       </button>
 
-      <button class="hero__button" @click="selectStreamProvider(LiveStreamProvider.YT)">
+      <button
+        class="hero__button"
+        @click="selectStreamProvider(LiveStreamProvider.YT)"
+      >
         YouTube <span class="hero__headless-arrow" />
       </button>
     </div>
   </div>
 
-  <div v-else>
-    <iframe v-if="selectedLiveStream === LiveStreamProvider.LP" width="560" height="315" src="" title="Livepeer video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+    <video-js :style="{display: selectedLiveStream === LiveStreamProvider.LP ? 'block' : 'none'}" controls="true" preload="auto" ref="LPVideoPlayer"
+    class="video-js vjs-big-play-centered">
+    </video-js>
 
-    <iframe v-if="selectedLiveStream === LiveStreamProvider.YT" width="560" height="315" src="https://www.youtube.com/embed/31SV969GXaA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
+    <video-js :style="{display: selectedLiveStream === LiveStreamProvider.YT ? 'block' : 'none'}" controls="true" preload="auto" ref="YTVideoPlayer"
+    class="video-js vjs-big-play-centered">
+    </video-js>
 
-  </div>
-  
-  
   <div class="hero__event-date">
-		<div class="hero__event-date-marquee-block">
-			<div class="hero__event-date-marquee-inner to-right">
-				<span>
-					<div class="hero__event-date-marquee-item">
-					ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-					ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-					ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-					ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-					ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-				</span>
-				<span>
-					<div class="hero__event-date-marquee-item">
-						ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-						ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-						ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-						ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-					<div class="hero__event-date-marquee-item">
-						ETH Prague &nbsp;  June 10th — 12th &nbsp;
-					</div>
-				</span>
-		</div>
-	</div>
-    <div class="hero__event-date-text-mobile">ETH Prague <br/> June 10th — 12th</div>
+    <div class="hero__event-date-marquee-block">
+      <div class="hero__event-date-marquee-inner to-right">
+        <span>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+        </span>
+        <span>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+          <div class="hero__event-date-marquee-item">
+            ETH Prague &nbsp; June 10th — 12th &nbsp;
+          </div>
+        </span>
+      </div>
+    </div>
+    <div class="hero__event-date-text-mobile">
+      ETH Prague <br />
+      June 10th — 12th
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { selectedLiveStream, LiveStreamProvider } from "./useHero";
+import 'videojs-youtube/dist/Youtube.min.js';
+import { onMounted, ref } from "vue";
+import videojs from 'video.js'
+import 'video.js/dist/video-js.min.css';
+import 'video.js/dist/video.min.js';
 
+const LPVideoPlayer = ref();
+const YTVideoPlayer = ref();
 
 enum DeviceType {
-  MOBIL = 'mobile',
-  DESKTOP = 'desktop',
+  MOBIL = "mobile",
+  DESKTOP = "desktop",
 }
 
-enum LiveStreamProvider {
-  YT = 'Youtube',
-  LP = 'Livepeer',
-}
-const selectedLiveStream = ref()
+// https://www.youtube.com/embed/31SV969GXaA
 
-const stripe = 'ETH Prague \u00A0  June 10th — 12th \u00A0'.repeat(3)
+const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/HHi8qOtHnhE";
+// const LINK_TO_LIVEPEER_STREAM =
+//   "https://livepeercdn.com/recordings/6bee1366-1c1d-43d2-9f62-01eb11946672/index.m3u8";
+
+const LINK_TO_LIVEPEER_STREAM ="//vjs.zencdn.net/v/oceans.mp4"
+
+const stripe = "ETH Prague \u00A0  June 10th — 12th \u00A0".repeat(3);
 
 const selectStreamProvider = (provider: LiveStreamProvider) => {
-  selectedLiveStream.value = provider
-}
+  selectedLiveStream.value = provider;
+};
 
 const getHeroImage = (forDevice: string) => {
   const randomHeroNum = Math.floor(Math.random() * 4) + 1;
   switch (forDevice) {
     case DeviceType.MOBIL:
-      return require(`../assets/hero/hero_mobile_${randomHeroNum}.webp`)
+      return require(`../assets/hero/hero_mobile_${randomHeroNum}.webp`);
     case DeviceType.DESKTOP:
-      return require(`../assets/hero/hero_${randomHeroNum}.webp`)
+      return require(`../assets/hero/hero_${randomHeroNum}.webp`);
   }
-}
+};
+
+onMounted( async () => {
+  const livepeer = LPVideoPlayer.value;
+
+  videojs(livepeer, {
+      fill: true,
+      responsive: true,
+      playbackRates: [0.5, 1, 1.5, 2],
+      sources: [
+      {
+        src: LINK_TO_LIVEPEER_STREAM,
+        type: 'application/x-mpegURL'
+      }]
+    })
+
+    const youtube = YTVideoPlayer.value;
+    const yoVideo = videojs(youtube, {
+      fill: true,
+      responsive: true,
+      playbackRates: [0.5, 1, 1.5, 2],
+      sources: [
+      {
+        src: LINK_TO_YOUTUBE_STREAM,
+        type: "video/youtube"
+      }]
+    })
+
+    // yoVideo.pip()
+})
 
 </script>
 
@@ -184,7 +228,9 @@ const getHeroImage = (forDevice: string) => {
   position: relative;
   display: none;
   align-items: center;
-  width: calc((var(--marquee-block-width--mobile)) * (var(--total-marquee-items)));
+  width: calc(
+    (var(--marquee-block-width--mobile)) * (var(--total-marquee-items))
+  );
 }
 .hero__event-date-marquee-inner {
   width: 200%;
@@ -197,15 +243,15 @@ const getHeroImage = (forDevice: string) => {
 .hero__event-date-marquee-item {
   width: var(--marquee-block-width--mobile);
   display: inline-block;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 @keyframes marqueeRight {
-  0% { 
-    left: -100%; 
+  0% {
+    left: -100%;
   }
   100% {
-   left: 0; 
+    left: 0;
   }
 }
 
@@ -225,12 +271,14 @@ const getHeroImage = (forDevice: string) => {
   }
   .hero__event-date-marquee-block {
     display: flex;
-    width: calc((var(--marquee-block-width--desktop)) * (var(--total-marquee-items)));
+    width: calc(
+      (var(--marquee-block-width--desktop)) * (var(--total-marquee-items))
+    );
   }
   .hero__event-date-marquee-item {
     width: var(--marquee-block-width--desktop);
   }
-  
+
   .hero__image-mobile {
     display: none;
   }
@@ -250,15 +298,13 @@ const getHeroImage = (forDevice: string) => {
   }
 }
 
-
-iframe {
-  display: block;       /* iframes are inline by default */
+iframe, video, .video-js {
+  display: block; /* iframes are inline by default */
   background: #000;
-  border: none;         /* Reset default border */
-  height: 90vh;        /* Viewport-relative units */
-  width: 100%;
+  border: none; /* Reset default border */
+  height: calc(100vh - var(--header-height)) !important; /* Viewport-relative units */
+  width: 100% !important;
 }
-
 
 .hero__buttons-row {
   display: flex;
@@ -277,7 +323,6 @@ iframe {
     max-width: 90%;
   }
 }
-
 
 .hero__button:hover,
 .hero__button:focus {
@@ -299,7 +344,6 @@ iframe {
   height: 12px;
   margin: 0 12px 2px;
 }
-
 
 .hero__button {
   transition: all 0.3s;
@@ -355,5 +399,9 @@ iframe {
   }
 }
 
+#liveStream {
+  position: absolute;
+  top: 0;
+}
 
 </style>
