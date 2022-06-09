@@ -6,3 +6,12 @@ export enum LiveStreamProvider {
 }
 
 export const selectedLiveStream = ref()
+const LPVideoPlayer = ref();
+const YTVideoPlayer = ref();
+
+export default function useHero() {
+  return { 
+    LPVideoPlayer,
+    YTVideoPlayer
+  }
+}

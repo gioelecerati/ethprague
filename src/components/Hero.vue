@@ -33,9 +33,10 @@
     class="video-js vjs-big-play-centered">
     </video-js>
 
-    <video-js :style="{display: selectedLiveStream === LiveStreamProvider.YT ? 'block' : 'none'}" controls="true" preload="auto" ref="YTVideoPlayer"
+    <!-- <video-js :style="{display: selectedLiveStream === LiveStreamProvider.YT ? 'block' : 'none'}" controls="true" preload="auto" ref="YTVideoPlayer"
     class="video-js vjs-big-play-centered">
-    </video-js>
+    </video-js> -->
+    <iframe v-if="selectedLiveStream === LiveStreamProvider.YT" width="560" height="315" :src="LINK_TO_YOUTUBE_STREAM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen/>
 
   <div class="hero__event-date">
     <div class="hero__event-date-marquee-block">
@@ -84,28 +85,33 @@
 </template>
 
 <script setup lang="ts">
-import { selectedLiveStream, LiveStreamProvider } from "./useHero";
+import useHero, { selectedLiveStream, LiveStreamProvider } from "./useHero";
 import { onMounted, ref } from "vue";
 import videojs from 'video.js'
 import 'video.js/dist/video-js.min.css';
 import 'video.js/dist/video.min.js';
-import 'videojs-youtube/dist/Youtube.min.js';
+// import 'videojs-youtube/dist/Youtube.min.js';
 import 'videojs-contrib-quality-levels'
 import 'videojs-hls-quality-selector'
 
 
-const LPVideoPlayer = ref();
-const YTVideoPlayer = ref();
+// const LPVideoPlayer = ref();
+// const YTVideoPlayer = ref();
 
 enum DeviceType {
   MOBIL = "mobile",
   DESKTOP = "desktop",
 }
 
+const {LPVideoPlayer, YTVideoPlayer} = useHero()
 // https://www.youtube.com/embed/31SV969GXaA
 
 const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/HHi8qOtHnhE";
+// const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/hls/6beegfmcd3sr8a7s/index.m3u8";
+
 const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/recordings/6bee1366-1c1d-43d2-9f62-01eb11946672/index.m3u8";
+
+// https://livepeercdn.com/hls/6beegfmcd3sr8a7s/index.m3u8
 
 //const LINK_TO_LIVEPEER_STREAM ="//vjs.zencdn.net/v/oceans.mp4"
 
@@ -117,6 +123,7 @@ const selectStreamProvider = (provider: LiveStreamProvider) => {
     YTVideoPlayer.value.player.play();
   } else {
     LPVideoPlayer.value.player.play();
+    LPVideoPlayer.value.getElementsByTagName("video")[0].style.display = "block";
   }
 };
 
@@ -132,6 +139,22 @@ const getHeroImage = (forDevice: string) => {
 
 onMounted( async () => {
   const livepeer = LPVideoPlayer.value;
+
+  // const plugin = document.createElement("script");
+  //   plugin.setAttribute(
+  //     "src",
+  //     "https://players.brightcove.net/1752604059001/Zbggd6KGf_default/index.min.js"
+  //   );
+  //   plugin.async = true;
+  //   document.head.appendChild(plugin);
+
+  //   const plugin2 = document.createElement("script");
+  //   plugin2.setAttribute(
+  //     "src",
+  //     "//players.brightcove.net/videojs-pip/1/videojs-pip.min.js"
+  //   );
+  //   plugin2.async = true;
+  //   document.head.appendChild(plugin2);
   
   videojs(livepeer, {
       fill: true,
@@ -145,6 +168,19 @@ onMounted( async () => {
         type: 'application/x-mpegURL'
       }],
     })
+
+    livepeer.player.hlsQualitySelector({
+      displayCurrentQuality: true,
+    })
+
+    // livepeer.player.ready(function() {
+    //   // When the player is ready, get a reference to it
+    //   // var myPlayer = this;
+    //   // Initialize the picture-in-picture plugin
+    //   // livepeer.player.pip();
+    // });
+
+    console.log(' livepeer.player',  LPVideoPlayer.value)
     
 
     const youtube = YTVideoPlayer.value;

@@ -82,8 +82,8 @@ export const fetchPeopleData = async() => {
   }  
 
   const getImageIdByPersonName = (person: PersonRaw) => {
-    const nameVariantA = `${person['name']}_${person['last name']}`
-    const nameVariantB = `${person['name']} ${person['last name']}`
+    const nameVariantA = `${person['name']}${person['last name'] ? '_' + person['last name'] : ''}`
+    const nameVariantB = `${person['name']}${person['last name'] ? ' ' + person['last name'] : ''}`
 
     const imageId = imagesDataJson.value.find((image: {name: string}) =>
       image.name.toLowerCase().includes(nameVariantA.toLowerCase()) ||
@@ -95,7 +95,7 @@ export const fetchPeopleData = async() => {
   }
 
   const getImageFallback = (person: PersonRaw) => {
-    const personName = `${person['name']} ${person['last name']}`
+    const personName = `${person['name']}${person['last name'] ? ' ' + person['last name'] : ''}`
     const fallbackPerson = peopleFallback.find((person: Person) =>
       person.name.toLowerCase().includes(personName.toLowerCase()))
     if (fallbackPerson) {
