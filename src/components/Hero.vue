@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="hero">
+  <div class="hero">
     <div class="hero__image-desktop">
       <img class="hero__image-eth" src="../assets/hero/hero_eth.svg" />
       <img class="hero__image-polis" src="../assets/hero/hero_polis.svg" />
@@ -8,7 +8,7 @@
       <img class="hero__image-main-image" :src="getHeroImage(DeviceType.DESKTOP)" />
     </div>
     <img class="hero__image-mobile" :src="getHeroImage(DeviceType.MOBIL)" alt="hero" />
-  </div> -->
+  </div>
   <span id="liveStream" />
   <div class="hero__stream-buttons" v-if="!selectedLiveStream">
     <h1 class="hero__stream-title">Live stream</h1>
@@ -201,6 +201,7 @@ onMounted( async () => {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: absolute;
 }
 
 .hero__image-desktop {
