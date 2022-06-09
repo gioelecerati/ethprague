@@ -3,7 +3,6 @@
     <Header />
     <router-view />
     <Footer />
-    <span id="simulateClick"/>
   </div>
 </template>
 
@@ -12,21 +11,16 @@ import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue';
 import { onMounted, onUnmounted } from 'vue';
 import useHero, { selectedLiveStream, LiveStreamProvider } from "@/components/useHero";
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const {LPVideoPlayer, YTVideoPlayer} = useHero()
 
 const showVideoStreamInPip = async () => {
-  console.log(window.pageYOffset)
-  if(window.pageYOffset > 50) {
+  if(window.pageYOffset > 50 || router.currentRoute.value.name === "Schedule") {
     
     if (selectedLiveStream.value === LiveStreamProvider.LP) {
-      // if (document.getElementById('simulateClick')) {
-      //   document.getElementById('simulateClick').click();
-      // }
-      setTimeout(() => {
       LPVideoPlayer.value.player.requestPictureInPicture()
-      }, 100)
-      console.log('LPVideoPlayer.value', LPVideoPlayer.value.player)
       LPVideoPlayer.value
     }
 
@@ -35,22 +29,10 @@ const showVideoStreamInPip = async () => {
     }
   }
 
-  if(window.pageYOffset < 50 && document.pictureInPictureElement) {
 
+  if(window.pageYOffset < 50 && document.pictureInPictureElement && router.currentRoute.value.name === "MainPage") {
     await document.exitPictureInPicture();
-
   }
-
-  // setTimeout(() => {
-  //   video.requestPictureInPicture()
-  //     .then(() => {
-  //       // auto-exit in 1s
-  //       setTimeout(() => {
-  //         document.exitPictureInPicture();
-  //       }, 1000);
-  //     })
-  //     .catch(console.error);
-  // }, ms);
 }
 
 onMounted(async () => {

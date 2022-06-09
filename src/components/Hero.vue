@@ -95,9 +95,6 @@ import 'videojs-contrib-quality-levels'
 import 'videojs-hls-quality-selector'
 
 
-// const LPVideoPlayer = ref();
-// const YTVideoPlayer = ref();
-
 enum DeviceType {
   MOBIL = "mobile",
   DESKTOP = "desktop",
@@ -106,14 +103,11 @@ enum DeviceType {
 const {LPVideoPlayer, YTVideoPlayer} = useHero()
 // https://www.youtube.com/embed/31SV969GXaA
 
-const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/HHi8qOtHnhE";
-// const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/hls/6beegfmcd3sr8a7s/index.m3u8";
+// const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/HHi8qOtHnhE"; //demo
+
+const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/kFZP9J9yo-0"
 
 const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/recordings/6bee1366-1c1d-43d2-9f62-01eb11946672/index.m3u8";
-
-// https://livepeercdn.com/hls/6beegfmcd3sr8a7s/index.m3u8
-
-//const LINK_TO_LIVEPEER_STREAM ="//vjs.zencdn.net/v/oceans.mp4"
 
 const stripe = "ETH Prague \u00A0  June 10th — 12th \u00A0".repeat(3);
 
