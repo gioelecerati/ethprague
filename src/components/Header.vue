@@ -35,6 +35,10 @@
         <a href="https://twitter.com/EthPrague" target="_blank">
           <img src="../assets/twitter.svg" alt="twitter" />
         </a>
+
+        <a href="https://gm.events/" target="_blank">
+          <img src="../assets/gm.svg" alt="gm.events" />
+        </a>
       </div>
     </div>
   </div>
@@ -64,6 +68,10 @@
 
         <a href="https://twitter.com/EthPrague" target="_blank">
           <img src="../assets/twitter.svg" alt="twitter" />
+        </a>
+
+        <a href="https://gm.events/" target="_blank">
+          <img src="../assets/gm.svg" alt="gm.events" />
         </a>
       </div>
     </div>
@@ -164,7 +172,7 @@ const localLinks = [
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  gap: 15px;
+  gap: 10px;
   width: 15rem;
 }
 
@@ -211,8 +219,10 @@ const localLinks = [
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: 20px 10px;
 }
+
+
 
 .header-mobile__hamburger-menu {
   margin: 0 1rem;
@@ -248,6 +258,21 @@ const localLinks = [
   cursor: pointer;
   filter: brightness(0) saturate(100%) invert(90%) sepia(70%) saturate(7500%)
     hue-rotate(355deg) brightness(104%) contrast(108%);
+  width: 11rem;
+
+}
+
+@media only screen and (min-width: 390px) {
+  .header-mobile__content {
+    padding: 20px;
+  }
+
+  .header__social-links {
+    gap: 7px;
+  }
+  .header__logo-eth {
+    width: 15rem;
+  }
 }
 
 /* Animation */
@@ -259,4 +284,6 @@ const localLinks = [
 .fade-leave-to {
   opacity: 0;
 }
+
+
 </style>

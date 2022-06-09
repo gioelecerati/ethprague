@@ -73,6 +73,8 @@ export const findPersonByName = (personToFind: any) => {
   return undefined;
 };
 
+const checkLastName = (person: PersonRaw) => (`${person['last name'] ? ' ' + person['last name'] : ''}`)
+
 export const fetchPeopleData = async() => {
   try {
     const imagesDataCsv = await axios.get(imagesNamesAndIds)
@@ -82,8 +84,9 @@ export const fetchPeopleData = async() => {
   }  
 
   const getImageIdByPersonName = (person: PersonRaw) => {
+
     const nameVariantA = `${person['name']}${person['last name'] ? '_' + person['last name'] : ''}`
-    const nameVariantB = `${person['name']}${person['last name'] ? ' ' + person['last name'] : ''}`
+    const nameVariantB = `${person['name']}${checkLastName(person)}`
 
     const imageId = imagesDataJson.value.find((image: {name: string}) =>
       image.name.toLowerCase().includes(nameVariantA.toLowerCase()) ||
@@ -95,7 +98,7 @@ export const fetchPeopleData = async() => {
   }
 
   const getImageFallback = (person: PersonRaw) => {
-    const personName = `${person['name']}${person['last name'] ? ' ' + person['last name'] : ''}`
+    const personName = `${person['name']}${checkLastName(person)}`
     const fallbackPerson = peopleFallback.find((person: Person) =>
       person.name.toLowerCase().includes(personName.toLowerCase()))
     if (fallbackPerson) {
@@ -120,13 +123,13 @@ export const fetchPeopleData = async() => {
   if (isDataCorrupted) isGoogleDataCorrupted.value = true
 
   const filteredEmptyObjects = peopleDataJson.value.filter(person => {
-    if (person.name === '' || person['last name'] === '') return false
+    if (person.name === '') return false
     return true
   })
 
   peopleData.value = (filteredEmptyObjects || []).map(person => {
     return {
-      name: `${person.name} ${person['last name']}`,
+      name: `${person.name}${checkLastName(person)}`,
       company: person.company,
       imageId: getImageIdByPersonName(person),
       imageFallback: getImageFallback(person),
