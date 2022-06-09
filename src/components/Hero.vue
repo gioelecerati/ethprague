@@ -401,6 +401,7 @@ iframe, video, .video-js {
   z-index: 10;
   padding: 0 2rem;
   color: white;
+  font-family: "Archivo SemiExpanded", Verdana, sans-serif;
   background-color: var(--col-primary-action);
 }
 
