@@ -85,11 +85,14 @@
 
 <script setup lang="ts">
 import { selectedLiveStream, LiveStreamProvider } from "./useHero";
-import 'videojs-youtube/dist/Youtube.min.js';
 import { onMounted, ref } from "vue";
 import videojs from 'video.js'
 import 'video.js/dist/video-js.min.css';
 import 'video.js/dist/video.min.js';
+import 'videojs-youtube/dist/Youtube.min.js';
+import 'videojs-contrib-quality-levels'
+import 'videojs-hls-quality-selector'
+
 
 const LPVideoPlayer = ref();
 const YTVideoPlayer = ref();
@@ -102,15 +105,19 @@ enum DeviceType {
 // https://www.youtube.com/embed/31SV969GXaA
 
 const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/HHi8qOtHnhE";
-// const LINK_TO_LIVEPEER_STREAM =
-//   "https://livepeercdn.com/recordings/6bee1366-1c1d-43d2-9f62-01eb11946672/index.m3u8";
+const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/recordings/6bee1366-1c1d-43d2-9f62-01eb11946672/index.m3u8";
 
-const LINK_TO_LIVEPEER_STREAM ="//vjs.zencdn.net/v/oceans.mp4"
+//const LINK_TO_LIVEPEER_STREAM ="//vjs.zencdn.net/v/oceans.mp4"
 
 const stripe = "ETH Prague \u00A0  June 10th — 12th \u00A0".repeat(3);
 
 const selectStreamProvider = (provider: LiveStreamProvider) => {
   selectedLiveStream.value = provider;
+  if (provider == "Youtube" ) {
+    YTVideoPlayer.value.player.play();
+  } else {
+    LPVideoPlayer.value.player.play();
+  }
 };
 
 const getHeroImage = (forDevice: string) => {
@@ -125,31 +132,31 @@ const getHeroImage = (forDevice: string) => {
 
 onMounted( async () => {
   const livepeer = LPVideoPlayer.value;
-
+  
   videojs(livepeer, {
       fill: true,
       responsive: true,
-      playbackRates: [0.5, 1, 1.5, 2],
+      controlBar:{
+        pictureInPictureToggle: true,
+      },
       sources: [
       {
         src: LINK_TO_LIVEPEER_STREAM,
         type: 'application/x-mpegURL'
-      }]
+      }],
     })
+    
 
     const youtube = YTVideoPlayer.value;
-    const yoVideo = videojs(youtube, {
+    videojs(youtube, {
       fill: true,
       responsive: true,
-      playbackRates: [0.5, 1, 1.5, 2],
       sources: [
       {
         src: LINK_TO_YOUTUBE_STREAM,
         type: "video/youtube"
       }]
     })
-
-    // yoVideo.pip()
 })
 
 </script>
