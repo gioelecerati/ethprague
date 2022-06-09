@@ -11,7 +11,7 @@
   </div>
   <span id="liveStream" />
   <div class="hero__stream-buttons" v-if="!selectedLiveStream">
-    <h1 class="hero__stream-title">Live stream</h1>
+    <h1 class="hero__stream-title"> Live stream </h1>
     <div class="hero__buttons-row">
       <button
         class="hero__button"
@@ -101,13 +101,16 @@ enum DeviceType {
 }
 
 const {LPVideoPlayer, YTVideoPlayer} = useHero()
-// https://www.youtube.com/embed/31SV969GXaA
-
 // const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/HHi8qOtHnhE"; //demo
 
-const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/kFZP9J9yo-0"
+const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/kFZP9J9yo-0" // 10.6.
+// const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/Fd0HjhZayt4" // 11.6.
+// const LINK_TO_YOUTUBE_STREAM = "https://www.youtube.com/embed/31SV969GXaA" // 12.6.
 
-const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/recordings/6bee1366-1c1d-43d2-9f62-01eb11946672/index.m3u8";
+
+// const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/recordings/6bee1366-1c1d-43d2-9f62-01eb11946672/index.m3u8"; // test
+
+const LINK_TO_LIVEPEER_STREAM = "https://livepeercdn.com/hls/2ed3nqwq5id2oadm/index.m3u8" // real livestream
 
 const stripe = "ETH Prague \u00A0  June 10th — 12th \u00A0".repeat(3);
 
@@ -133,22 +136,6 @@ const getHeroImage = (forDevice: string) => {
 
 onMounted( async () => {
   const livepeer = LPVideoPlayer.value;
-
-  // const plugin = document.createElement("script");
-  //   plugin.setAttribute(
-  //     "src",
-  //     "https://players.brightcove.net/1752604059001/Zbggd6KGf_default/index.min.js"
-  //   );
-  //   plugin.async = true;
-  //   document.head.appendChild(plugin);
-
-  //   const plugin2 = document.createElement("script");
-  //   plugin2.setAttribute(
-  //     "src",
-  //     "//players.brightcove.net/videojs-pip/1/videojs-pip.min.js"
-  //   );
-  //   plugin2.async = true;
-  //   document.head.appendChild(plugin2);
   
   videojs(livepeer, {
       fill: true,
@@ -166,16 +153,6 @@ onMounted( async () => {
     livepeer.player.hlsQualitySelector({
       displayCurrentQuality: true,
     })
-
-    // livepeer.player.ready(function() {
-    //   // When the player is ready, get a reference to it
-    //   // var myPlayer = this;
-    //   // Initialize the picture-in-picture plugin
-    //   // livepeer.player.pip();
-    // });
-
-    console.log(' livepeer.player',  LPVideoPlayer.value)
-    
 
     const youtube = YTVideoPlayer.value;
     videojs(youtube, {
@@ -339,6 +316,7 @@ onMounted( async () => {
 iframe, video, .video-js {
   display: block; /* iframes are inline by default */
   background: #000;
+  position: relative;
   border: none; /* Reset default border */
   height: calc(100vh - var(--header-height)) !important; /* Viewport-relative units */
   width: 100% !important;
@@ -420,6 +398,10 @@ iframe, video, .video-js {
 }
 .hero__stream-title {
   margin-bottom: 5rem;
+  z-index: 10;
+  padding: 0 2rem;
+  color: white;
+  background-color: var(--col-primary-action);
 }
 
 @media (max-width: 1120px) {
