@@ -9,6 +9,40 @@
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue';
+import { onMounted, onUnmounted } from 'vue';
+import useHero, { selectedLiveStream, LiveStreamProvider } from "@/components/useHero";
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const {LPVideoPlayer, YTVideoPlayer} = useHero()
+
+const showVideoStreamInPip = async () => {
+  if(window.pageYOffset > 50 || router.currentRoute.value.name === "Schedule") {
+    
+    if (selectedLiveStream.value === LiveStreamProvider.LP) {
+      LPVideoPlayer.value.player.requestPictureInPicture()
+      LPVideoPlayer.value
+    }
+
+    if (selectedLiveStream.value === LiveStreamProvider.YT) {
+      YTVideoPlayer.value
+    }
+  }
+
+
+  if(window.pageYOffset < 50 && document.pictureInPictureElement && router.currentRoute.value.name === "MainPage") {
+    await document.exitPictureInPicture();
+  }
+}
+
+onMounted(async () => {
+  window.addEventListener("scroll", showVideoStreamInPip, { passive: true });
+
+})
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", showVideoStreamInPip);
+});
 </script>
 
 <style lang="css">
@@ -27,6 +61,8 @@ import Footer from '@/components/Footer.vue';
 
     --mobile-breakpoint: 1120px;
     --app-padding: 15px;
+
+    --header-height: 80px;
   }
 
   html, body {

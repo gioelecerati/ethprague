@@ -19,6 +19,9 @@
         <router-link @click="isHamMenuOpen = false" class="header__local-link" :to="{ path: '/', hash: '#SponsorsAndPartners' }">
           Sponsors & Partners
         </router-link>
+        <router-link @click="isHamMenuOpen = false" class="header__local-link" :to="{ path: '/', hash: '#liveStream' }">
+          Live stream
+        </router-link>
         <router-link class="header__local-link" to="/schedule">
           Schedule
         </router-link>
@@ -86,6 +89,9 @@
         <router-link @click="isHamMenuOpen = false" class="header-mobile__local-link" :to="{ path: '/', hash: '#SponsorsAndPartners' }">
           Sponsors & Partners
         </router-link>
+        <router-link @click="isHamMenuOpen = false" class="header-mobile__local-link" :to="{ path: '/', hash: '#liveStream' }">
+          Live stream
+        </router-link>
         <router-link @click="isHamMenuOpen = false" class="header-mobile__local-link" to="/schedule">
           Schedule
         </router-link>
@@ -100,7 +106,7 @@ const isHamMenuOpen = ref(false);
 const localLinks = [
   "Manifesto",
   // "Hackathon",
-  "Speakers",
+  // "Speakers",
   "FAQ",
 ];
 </script>
@@ -109,7 +115,7 @@ const localLinks = [
 .header {
   position: sticky;
   top: 0;
-  height: 80px;
+  height: var(--header-height);
   width: 100%;
   display: flex;
   justify-content: center;

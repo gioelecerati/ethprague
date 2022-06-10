@@ -53,14 +53,14 @@
         </div>
         <div class="schedule__venues">
           <div class="schedule__venue">
-            <div>La Fabrika</div>
+            <div>La Fabrika <span class="schedule__venue-subtitle">(Livestream)</span></div>
             <div class="schedule__venue-additional-info">Entrance #2</div>
           </div>
           <div class="schedule__venue">
             <div>Paralelni Polis</div>
             <div class="schedule__venue-additional-info">Registrations + Entrance #1</div>
-
           </div>
+          <span class="schedule__venues-all-times-zone">All times are in CET</span>
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
         <div class="schedule__venues-opening">
           <div class="schedule__venue-opening">
             <div class="schedule__venue-opening-text">
-              <strong>La Fabrika</strong><br />
+              <strong>La Fabrika</strong> (Livestream)<br />
               Entrance #2<br />
               open door – 10am<br />
               close door – 10pm<br />
@@ -428,6 +428,7 @@ onUnmounted(() => {
 }
 
 .schedule__venues {
+  position: relative;
   display: none;
   flex-direction: row;
   justify-content: center;
@@ -540,7 +541,7 @@ onUnmounted(() => {
   margin-bottom: 1.5rem;
 }
 
-..schedule__dates-buttons:last-child {
+.schedule__dates-buttons:last-child {
   margin-bottom: var(--app-padding);
 }
 
@@ -629,5 +630,15 @@ onUnmounted(() => {
 
 .schedule__venue-additional-info {
   font-size: 15px;
+}
+
+.schedule__venue-subtitle {
+  font-size: 19px;
+}
+
+.schedule__venues-all-times-zone {
+  position: absolute;
+  bottom: -25px;
+
 }
 </style>
