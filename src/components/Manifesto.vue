@@ -58,6 +58,9 @@
       </div>
     </div>
 
+    <img src="../assets/floorplan.png" alt="plan" class="manifesto__floorplan"/>
+
+
     <div id="Manifesto" class="manifesto__text-container">
       <SectionTitle title="manifesto" />
       <div class="manifesto__text-content">
@@ -226,5 +229,12 @@ import SectionTitle from "@/components/SectionTitle.vue";
   position: relative;
   top: -80px;
   visibility: hidden;
+}
+
+.manifesto__floorplan {
+  max-width: 1000px;
+  width: 100%;
+  object-fit: contain;
+  margin: 7rem 1rem 1rem;
 }
 </style>
