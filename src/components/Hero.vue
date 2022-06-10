@@ -155,7 +155,6 @@ onMounted( async () => {
     
     var img = livepeer.player.controlBar.addChild('Component', {}, 3); // 3rd arg is index, i.e. first
     img.addClass("livepeer-logo");
-    console.log(img)
     img.el_.setAttribute("style",'background:url("https://streameth.tv/_next/image?url=%2Flivepeer_logo_dark.png&w=96&q=75");width: 100px;padding: 3px;filter: invert(1);')
     img.el_.setAttribute("onclick",'window.open("https://livepeer.org/", "_blank")');
 
