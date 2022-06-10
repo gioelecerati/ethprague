@@ -28,12 +28,9 @@
       </button>
     </div>
   </div>
-    <div style="position:relative">
       <video-js :style="{display: selectedLiveStream === LiveStreamProvider.LP ? 'block' : 'none'}" controls="true" preload="auto" ref="LPVideoPlayer"
       class="video-js vjs-big-play-centered lp-player">
       </video-js>
-      <img src="../assets/livepeer_white_logo.png" class="livepeer-logo"/>
-    </div>
 
     <!-- <video-js :style="{display: selectedLiveStream === LiveStreamProvider.YT ? 'block' : 'none'}" controls="true" preload="auto" ref="YTVideoPlayer"
     class="video-js vjs-big-play-centered">
@@ -154,7 +151,13 @@ onMounted( async () => {
 
     livepeer.player.hlsQualitySelector({
       displayCurrentQuality: true,
-    })
+    });
+    
+    var img = livepeer.player.controlBar.addChild('Component', {}, 3); // 3rd arg is index, i.e. first
+    img.addClass("livepeer-logo");
+    console.log(img)
+    img.el_.setAttribute("style",'background:url("https://streameth.tv/_next/image?url=%2Flivepeer_logo_dark.png&w=96&q=75");width: 100px;padding: 3px;filter: invert(1);')
+    img.el_.setAttribute("onclick",'window.open("https://livepeer.org/", "_blank")');
 
     const youtube = YTVideoPlayer.value;
     videojs(youtube, {
@@ -429,13 +432,6 @@ iframe, video, .video-js {
 
 .lp-player{
   position:relative;
-}
-img.livepeer-logo{
-  z-index: 1;
-  position: absolute;
-  bottom: 25px;
-  right: 0;
-  width: 182px;
 }
 .lp-player video{
   position: absolute;
