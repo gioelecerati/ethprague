@@ -30,7 +30,7 @@
   </div>
 
     <video-js :style="{display: selectedLiveStream === LiveStreamProvider.LP ? 'block' : 'none'}" controls="true" preload="auto" ref="LPVideoPlayer"
-    class="video-js vjs-big-play-centered">
+    class="video-js vjs-big-play-centered lp-player">
     </video-js>
 
     <!-- <video-js :style="{display: selectedLiveStream === LiveStreamProvider.YT ? 'block' : 'none'}" controls="true" preload="auto" ref="YTVideoPlayer"
@@ -425,4 +425,13 @@ iframe, video, .video-js {
   top: 0;
 }
 
+.lp-player video{
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100vh;
+}
 </style>
