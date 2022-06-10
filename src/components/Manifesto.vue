@@ -48,13 +48,16 @@
             See schedule <span class="manifesto__headless-arrow" />
           </button>
         </router-link>
-        <!--      <a-->
-        <!--        href="https://cf23uhv4kuq.typeform.com/to/XABwNH5T"-->
-        <!--        target="_blank"-->
-        <!--        class="manifesto__button-link"-->
-        <!--      >-->
-        <!--        <button class="manifesto__button">Apply for scholarships <span class="manifesto__headless-arrow"/></button>-->
-        <!--      </a>-->
+      </div>
+      <div class="manifesto__buttons-row">
+        <a
+          href="https://ethprague-2022.devpost.com/"
+          target="_blank"
+          class="manifesto__button-link"
+        >
+          <button class="manifesto__button">Submit a project<span class="manifesto__headless-arrow"/></button>
+        </a>
+
       </div>
     </div>
 
