@@ -434,4 +434,7 @@ iframe, video, .video-js {
   max-width: 100%;
   max-height: 100vh;
 }
+.vjs-fullscreen video{
+  height: 100vh!important;
+}
 </style>
