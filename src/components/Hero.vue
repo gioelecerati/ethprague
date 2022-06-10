@@ -28,10 +28,12 @@
       </button>
     </div>
   </div>
-
-    <video-js :style="{display: selectedLiveStream === LiveStreamProvider.LP ? 'block' : 'none'}" controls="true" preload="auto" ref="LPVideoPlayer"
-    class="video-js vjs-big-play-centered lp-player">
-    </video-js>
+    <div style="position:relative">
+      <video-js :style="{display: selectedLiveStream === LiveStreamProvider.LP ? 'block' : 'none'}" controls="true" preload="auto" ref="LPVideoPlayer"
+      class="video-js vjs-big-play-centered lp-player">
+      </video-js>
+      <img src="../assets/livepeer_white_logo.png" class="livepeer-logo"/>
+    </div>
 
     <!-- <video-js :style="{display: selectedLiveStream === LiveStreamProvider.YT ? 'block' : 'none'}" controls="true" preload="auto" ref="YTVideoPlayer"
     class="video-js vjs-big-play-centered">
@@ -425,6 +427,16 @@ iframe, video, .video-js {
   top: 0;
 }
 
+.lp-player{
+  position:relative;
+}
+img.livepeer-logo{
+  z-index: 1;
+  position: absolute;
+  bottom: 25px;
+  right: 0;
+  width: 182px;
+}
 .lp-player video{
   position: absolute;
   margin: auto;
